@@ -1,146 +1,155 @@
+// eslint-disable-next-line
 import React, { Component } from 'react';
+import Search from './Search.js';
+import Movie from './Movie.js';
+import List from './List.js';
+import Button from './Button.js';
 import "./App.css";
+
 const axios = require('axios');
 
-const Search = (props) => {
-    let resultList = null
 
-    if (props.searching && (props.defaultTitle !== '')) {
-        resultList = (
-            <ul className="results">
-                {props.results.map(item => (
-                    <li className="list-item" key={item.imdbID} onClick={() => props.clicked(item)}>
-                    <div className="image-container">
-                        <img className="poster" src={item.Poster} alt="Movie Poster"/>
-                        </div>
-                        <div className="text-container">{item.Title}</div>
-                    </li>
-                ))}
-            </ul>
-        )
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      movie: {},
+      movieId: "tt0110912",
+      searchResults: [],
+      searchTerm: "",
+      viewList: false,
+      favorites: {},
+      viewFaves: false,
     }
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleFav = this.toggleFav.bind(this);
+    this.showFaves = this.showFaves.bind(this);
+
+  }
+
+  componentDidMount() {
+    let favsStored = {};
+    if (localStorage.length > 0) {
+      for (let i = 0; i < localStorage.length; i++) {
+        favsStored[`${localStorage.key(i)}`] = JSON.parse(localStorage.getItem(`${localStorage.key(i)}`))
+      }
+      this.setState({ favorites: favsStored })
+    };
+
+    this.loadMovie();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.movieId !== this.state.movieId) {
+      this.loadMovie()
+    }
+  }
+
+
+  handleChange(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    this.setState({ viewList: true });
+    if (this.state.searchTerm !== "") {
+      await axios.get(`http://www.omdbapi.com/?apikey=662e4552&s=${this.state.searchTerm}`)
+        .then(response => {
+          if (response.data.Search) {
+            const movies = response.data.Search.slice(0, 10);
+            this.setState({ searchResults: movies });
+          }
+        })
+        .catch(error => {
+          console.log('Oops!', error.message);
+        })
+    }
+  }
+
+  loadMovie() {
+    axios.get(`http://www.omdbapi.com/?apikey=662e4552&i=${this.state.movieId}`)
+      .then(response => {
+        this.setState({ movie: response.data });
+      })
+      .catch(error => {
+        console.log('Oops!', error.message);
+      })
+  }
+
+  itemClicked = (item) => {
+    this.setState(
+      {
+        movieId: item.imdbID,
+        viewList: false,
+      }
+    )
+  }
+
+  toggleFav(item, mv = this.state.movie) {
+    let favs = this.state.favorites;
+    if (Object.keys(favs).includes(item)) {
+      delete favs[`${item}`];
+      localStorage.removeItem(`${item}`);
+      this.setState({ favorites: favs });
+      console.log(`Deleted ${item}`)
+    }
+    else favs[`${item}`] = mv;
+    this.setState({ favorites: favs });
+    localStorage.setItem(`${item}`, JSON.stringify(mv));
+    console.log(`Added ${item}`);
+  }
+
+  isEmptyObject(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+      else return true;
+    }
+  }
+
+  showFaves() {
+    let view = this.state.viewFaves;
+    this.setState({ viewFaves: !view })
+  }
+
+  clearLs() {
+    localStorage.clear();
+    this.setState({ favorites: {} });
+    console.log('Cleared!')
+  }
+
+
+  render() {
     return (
-        <div className="search">
-            <input className="search-box" type="search" name="movie-search" value={props.defaultTitle} onChange={props.search} />
-            {resultList}
-        </div>
-    );
-};
-const Card = (props) => {
-    return (
-        <div className="container">
-            <div className="movie-card">
-            <div className="image-container">
-                        <img src={props.movie.Poster} alt="Movie Poster"/>
-                        </div>
-                <div className="movie-content">
-                    <div className="movie-content-header">
-                        <h3 className="movie-title">{props.movie.Title}</h3>
-                    </div>
-                    <div className="movie-info">
-                        <div className="info-section">
-                            <label>Released</label>
-                            <span>{props.movie.Released}</span>
-                        </div>
-                        <div className="info-section">
-                            <label>IMDB Rating</label>
-                            <span>{props.movie.imdbRating}</span>
-                        </div>
-                        <div className="info-section">
-                            <label>Rated</label>
-                            <span>{props.movie.Rated}</span>
-                        </div>
-                        <div className="info-section">
-                            <label>Runtime</label>
-                            <span>{props.movie.Runtime}</span>
-                        </div>
-                    </div>
-                    <div className="plot">
-                        <p>{props.movie.Plot}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-class App extends Component {
-    state = {
-        movieId: 'tt0110912',
-        title: "",
-        movie: {},
-        searchResults: [],
-        isSearching: false,
-    }
+      <div className='container'>
+        <Search
+          searchTerm={this.state.searchTerm}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit} />
+        <List clickedItem={this.itemClicked}
+          viewList={this.state.viewList && this.state.searchTerm !== ""}
+          results={this.state.searchResults}
+          favorites={this.state.favorites}
+          toggleFav={this.toggleFav} />
+        <Button onClick={() => this.showFaves()}
+          text='Favorites' />
+        <List clickedItem={this.itemClicked}
+          viewList={this.state.viewFaves}
+          results={Object.values(this.state.favorites)}
+          favorites={this.state.favorites}
+          toggleFav={this.toggleFav} />
+          <Button onClick={() => this.clearLs()} text='clear' />
+        <Movie movie={this.state.movie}
+        favorites={this.state.favorites}
+          toggleFav={this.toggleFav} />
 
-    componentDidMount() {
-        this.loadMovie()
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.movieId !== this.state.movieId) {
-            this.loadMovie()
-        }
-    }
-
-    loadMovie() {
-        axios.get(`http://www.omdbapi.com/?apikey=662e4552&i=${this.state.movieId}`)
-            .then(response => {
-                this.setState({ movie: response.data });
-            })
-            .catch(error => {
-                console.log('Oops!', error.message);
-            })
-    }
-
-    
-    searchMovie = (event) => {
-        this.setState({ title: event.target.value, isSearching: true });
-
-        clearTimeout(this.timeout);
-
-        this.timeout = setTimeout(() => {
-            axios.get(`http://www.omdbapi.com/?apikey=662e4552&s=${this.state.title}`)
-                .then(response => {
-
-                    if (response.data.Search) {
-                        const movies = response.data.Search.slice(0, 5);
-                        this.setState({ searchResults: movies });
-                    }
-                })
-                .catch(error => {
-                    console.log('Oops!', error.message);
-                })
-        }, 1000)
-
-
-    }
-
-    itemClicked = (item) => {
-        this.setState(
-            {
-                movieId: item.imdbID,
-                isSearching: false,
-                title: item.Title,
-            }
-        )
-    }
-
-
-    render() {
-        return (
-            <div onClick={() => this.setState({ isSearching: false })}>
-                <Search
-                    defaultTitle={this.state.title}
-                    search={this.searchMovie}
-                    results={this.state.searchResults}
-                    clicked={this.itemClicked}
-                    searching={this.state.isSearching} />
-
-                <Card movie={this.state.movie} />
-            </div>
-        );
-    }
+      </div>
+    )
+  }
 }
 
 export default App;

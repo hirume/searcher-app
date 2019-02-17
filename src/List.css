@@ -1,0 +1,14 @@
+.list {
+    list-style: none;
+
+}
+.list-item {
+    font-family: Helvetica;
+    font-size: 20px;
+    display: flex;
+    cursor: pointer;
+}
+
+.list-item:hover {
+    color: #f9a26c;
+}

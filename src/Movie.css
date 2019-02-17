@@ -1,0 +1,35 @@
+h1 {
+    font-family: 'Julius Sans One', sans-serif;
+    padding: 20px;
+}
+
+.image-container {
+    height: 410px;
+    width: 300px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.text-container {
+    align-self: flex-end;
+}
+.poster {
+    height: 410px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.movie-card {
+    display: flex;
+    background-color:#325d79;
+    color: #efeeee;
+    }
+
+.movie-content {
+        padding: 20px;
+        text-align: center;
+    }
+
+.info-section {
+        text-align: center;
+    }

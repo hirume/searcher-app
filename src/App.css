@@ -1,52 +1,8 @@
-.image-container {
-    height: 410px;
-    width: 300px;
-    box-sizing: border-box;
-    border: 1px #cccccc solid;
-}
-.results {
-    list-style: none;
-
-}
-.list-item {
-    font-family: Helvetica;
-    font-size: 20px;
-    display: flex;
-}
-.text-container {
-    align-self: flex-end;
-}
-.poster {
-    height: 410px;
-    width: 300px;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One|Raleway');
 
 .container {
-    font-family: Helvetica;
+    font-family: 'Raleway', sans-serif;
     font-size: 20px;
-    display: flex;
-}
-
-.search-box {
-height: 30px;
-width: 200px;
-}
-
-.search {
-padding: 10px;
-background-color:#cccccc;
-}
-
-.movie-card {
-display: flex;
-}
-.movie-content {
-    padding: 20px;
-    text-align: center;
-}
-.info-section {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
+margin: 0;
+background-color: #325d79;
 }
