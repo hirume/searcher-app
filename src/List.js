@@ -1,33 +1,30 @@
 // eslint-disable-next-line
 import React, { Component } from 'react';
 import ListItem from './ListItem.js';
-import FavHeart from './FavHeart.js'
-import "./List.css";
+import './List.css';
+
 
 function List(props) {
-let resultsList = null
-  
-    if (props.viewList) {
-      resultsList = (
-        <ul className="list">
-          {props.results.map(item => (
-            <li className="list-item" key={item.imdbID}>
-            <ListItem 
+if (props.movies.length > 0) {
+  return (
+    <div className='list-container'><ul className='list'>
+      {props.movies.map(item => (
+        <li className='list-item' key={item.imdbID}>
+          <ListItem
             movie={item}
-             clickedItem={props.clickedItem}
-              >
-              <FavHeart favorites={props.favorites} movie={item} toggleFav={props.toggleFav}/>
-              </ListItem>
-            </li>
-          ))}
-        </ul>
-      )
-    }
+            id={item.imdbID}
+            faves={props.faves}
+          >
+          </ListItem>
+        </li>
+      ))}
+    </ul>
+    {props.children}
+    </div>
+  )
 
-return (
-  <div>{resultsList}</div> 
-)
-
+}
+else return <p>Nothing here yet</p>
 }
 
 export default List;

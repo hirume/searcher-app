@@ -1,14 +1,12 @@
 .list {
     list-style: none;
-
-}
-.list-item {
-    font-family: Helvetica;
-    font-size: 20px;
     display: flex;
-    cursor: pointer;
+  flex-wrap: wrap;
+  height: auto;
+margin: 50px 0;
+
 }
 
-.list-item:hover {
-    color: #f9a26c;
+.list-container {
+  padding: 25px 2em;
 }
