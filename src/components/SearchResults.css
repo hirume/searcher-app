@@ -1,7 +1,6 @@
 .search-results {
   display: flex;
   background-color: #44004b;
-  color: white;
-  font-family: "Noto Sans", sans-serif;
+  color: #fff;
   font-size: 20px;
 }

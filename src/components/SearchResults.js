@@ -3,6 +3,7 @@ import Loading from "./Loading";
 import List from "./List";
 import { withRouter } from "react-router-dom";
 import Button from "./Button";
+import { Error } from "./Error";
 import "./SearchResults.css";
 
 class SearchResults extends React.Component {
@@ -15,14 +16,10 @@ class SearchResults extends React.Component {
             <Button onClick={() => onLoadMore()} text={"Load more"} />
           </List>
         ) : (
-          <p>Search for something</p>
+          <p>Nothing found</p>
         )}
         {loading ? <Loading /> : null}
-        {error && (
-          <p style={{ color: "red" }}>
-            An error has occured! {console.log(error)}
-          </p>
-        )}
+        {error && <Error text="An error has occured" />}
       </div>
     );
   }

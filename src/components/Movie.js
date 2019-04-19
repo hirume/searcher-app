@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Loading from "./Loading";
+import { Error } from './Error';
 import Heart from "./Heart";
 import "./Movie.css";
 
@@ -85,7 +86,7 @@ class Movie extends React.Component {
           </div>
         </div>
       );
-    } else return <p>Something went wrong!</p>;
+    } else return <Error text='Something went wrong!' />;
   }
 }
 

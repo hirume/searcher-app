@@ -1,9 +1,7 @@
 .movie-card {
-  height: 75vh;
   display: flex;
-  flex-wrap: wrap;
   background-color: #44004b;
-  color: #efeeee;
+  color: #fff;
   padding: 25px;
 }
 
@@ -31,7 +29,6 @@
 }
 
 .text-container {
-  font-family: "Noto Sans", sans-serif;
   font-size: 20px;
   padding: 0 25px;
   display: flex;
@@ -73,4 +70,14 @@ h1 {
   display: inline-block;
   box-sizing: border-box;
   align-self: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .movie-card {
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+
 }

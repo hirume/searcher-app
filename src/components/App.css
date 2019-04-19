@@ -11,7 +11,7 @@
 
 .faves-link {
   display: inline-block;
-  color: white;
+  color: #fff;
   text-decoration: none;
   margin-top: 12px;
   font-family: 'Fjalla One', sans-serif;
@@ -19,4 +19,8 @@
 
 .faves-link:hover {
   color:  #00d4c3;
+}
+
+.popcorn {
+  align-self: flex-end;
 }
