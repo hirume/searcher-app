@@ -25,7 +25,7 @@ function reducer(state = initialState, action) {
       let newFavs = state.faves.filter(mv => mv.imdbID !== action.payload.imdbID)
       return {...state, faves: newFavs};
     case 'GET_MOVIE':
-      return { ...state, id: action.payload, error: null };
+      return { ...state, id: action.payload, loading: true, error: null };
     case 'GET_MOVIE_SUCCESS':
       return { ...state, loading: false, currentMovie: action.movie };
     case 'GET_MOVIE_FAILURE':

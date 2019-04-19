@@ -4,7 +4,7 @@
   margin: 0;
   background-color: #44004b;
   font-family: 'Noto Sans', sans-serif;
-  font-size: 20px;
+  font-size: 1.5rem;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -15,6 +15,7 @@
   text-decoration: none;
   margin-top: 12px;
   font-family: 'Fjalla One', sans-serif;
+  font-size: 1.5rem;
 }
 
 .faves-link:hover {
@@ -23,4 +24,11 @@
 
 .popcorn {
   align-self: flex-end;
+}
+
+@media only screen and (max-width: 600px) {
+  .faves-link {
+    font-size: 0.8em;
+  }
+  
 }

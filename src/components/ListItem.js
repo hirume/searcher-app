@@ -52,14 +52,14 @@ class ListItem extends React.Component {
             {this.state.isFav ? (
               <Heart
                 onClick={this.deleteFav}
-                size={24}
+                size={48}
                 name="full"
                 color="#00d4c3"
               />
             ) : (
               <Heart
                 onClick={this.addFav}
-                size={24}
+                size={48}
                 name="empty"
                 color="#00d4c3"
               />

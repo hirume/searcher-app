@@ -13,7 +13,7 @@
   background-color: #580061;
   border: 0;
   color: #fff;
-  font-size: 20px;
+  font-size: 1rem;
 }
 
 .right-part {
@@ -36,6 +36,7 @@
   }
 
   .search-box {
-    min-width: 200px;
+    min-width: 100px;
   }
+
 }
