@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Fjalla+One|Noto+Sans");
+
+.container {
+  margin: 0;
+  background-color: #44004b;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.faves-link {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  margin-top: 12px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.faves-link:hover {
+  color:  #00d4c3;
+}

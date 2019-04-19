@@ -1,0 +1,76 @@
+.movie-card {
+  height: 75vh;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #44004b;
+  color: #efeeee;
+  padding: 25px;
+}
+
+.image-container {
+  height: 410px;
+  width: 300px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
+}
+
+.poster {
+  height: 410px;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.favheart-lg {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  bottom: 8px;
+  right: 8px;
+}
+
+.text-container {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 20px;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  max-width: 900px;
+}
+
+.movie-title {
+  display: flex;
+}
+
+h1 {
+  font-family: "Fjalla One", sans-serif;
+  padding: 20px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+}
+
+.movie-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.info-section {
+  text-align: left;
+  padding: 0 25px;
+}
+
+.imdb-rating {
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 38px;
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  border: 3px #00d4c3 solid;
+  color: #00d4c3;
+  display: inline-block;
+  box-sizing: border-box;
+  align-self: center;
+}
