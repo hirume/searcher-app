@@ -1,3 +1,5 @@
+**Get an api key from https://www.omdbapi.com/apikey.aspx and add it to API_KEY in src/services/api.js**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
