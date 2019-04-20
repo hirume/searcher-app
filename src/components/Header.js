@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import Button from "./Button";
+import { ReactComponent as SearchIcon } from "../imgs/search.svg";
 import "./Header.css";
 
 class Header extends React.Component {
@@ -39,7 +39,7 @@ class Header extends React.Component {
               placeholder="Search for a movie..."
             />
           </form>
-          <Button text="Search" onClick={this.handleSubmit} />
+          <button className='search-button' onClick={this.handleSubmit}><SearchIcon /></button>
         </div>
       </div>
     );

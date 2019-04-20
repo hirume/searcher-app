@@ -30,6 +30,12 @@ class Movie extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.currentMovie.imdbID !== prevProps.currentMovie.imdbID) {
+      this.props.onGetMovie(this.props.currentMovie.imdbID);
+    }
+  }
+
   addFav() {
     this.props.onAddFav(this.props.currentMovie);
     this.setState({ isFav: true });
@@ -41,16 +47,21 @@ class Movie extends React.Component {
   }
 
   render() {
-    if (this.props.loading) {
+    const {
+      loading,
+      currentMovie
+    } = this.props;
+
+    if (loading) {
       return <Loading />;
     }
 
-    if (this.props.currentMovie) {
+    if (currentMovie) {
       return (
         <div className="movie-card">
           <div className="image-container">
             <img
-              src={this.props.currentMovie.Poster}
+              src={currentMovie.Poster}
               alt="Poster"
               className="poster"
             />
@@ -76,19 +87,20 @@ class Movie extends React.Component {
           <div className="text-container">
             <div className="movie-title">
               <h1>
-                {this.props.currentMovie.Title} ({this.props.currentMovie.Year})
+                {currentMovie.Title} ({currentMovie.Year})
               </h1>
               <p className="imdb-rating">
-                {this.props.currentMovie.imdbRating}
+                {currentMovie.imdbRating}
               </p>
             </div>
-            <p className="info-section">{this.props.currentMovie.Plot}</p>
+            <p className="info-section">{currentMovie.Plot}</p>
           </div>
         </div>
       );
     } else return <Error text='Something went wrong!' />;
   }
 }
+
 
 const mapDispatchToProps = dispatch => {
   return {

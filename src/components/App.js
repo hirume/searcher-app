@@ -19,7 +19,6 @@ class App extends React.Component {
       onLoadMore,
       error,
       currentMovie,
-      id
     } = this.props;
 
     return (
@@ -50,14 +49,7 @@ class App extends React.Component {
             <Route
               exact
               path="/movie/:id"
-              render={() => (
-                <Movie
-                  key={currentMovie.imdbID}
-                  currentMovie={currentMovie}
-                  faves={faves}
-                  id={id}
-                />
-              )}
+              render={() => <Movie key={currentMovie.imdbID} currentMovie={currentMovie} loading={loading} faves={faves}/>}
             />
             <Route
               exact

@@ -39,7 +39,7 @@ class ListItem extends React.Component {
 
   render() {
     return (
-      <div key={this.props.movie.imdbID} className="movie-item">
+      <div className="movie-item">
         <div className="list-movie-image-container">
           <Link to={`/movie/${this.props.movie.imdbID}`}>
             <img
