@@ -2,10 +2,15 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  margin: 1.5rem 0;
 }
 
 .list-container {
-  padding: 1.5rem;
   color: #fff;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.list-container > p {
+  margin-top: 3rem;
+  color: #ffffff62;
+  font-size: 1.2rem;
 }

@@ -1,11 +1,12 @@
 // eslint-disable-next-line
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./Header.js";
 import Movie from "./Movie";
 import SearchResults from "./SearchResults";
 import List from "./List.js";
+import NotFound from "./NotFound.js";
 import { ReactComponent as Popcorn } from "../imgs/popcorn.svg";
 import "./App.css";
 
@@ -33,10 +34,12 @@ class App extends React.Component {
             </Link>
           </Header>
           <Switch>
+            <Route exact path="/notfound" component={NotFound} />
             <Route
               exact
               path="/"
               render={() => (
+                movies === undefined ? (<Redirect to='/notfound' />) :
                 <SearchResults
                   movies={movies}
                   loading={loading}
@@ -49,7 +52,14 @@ class App extends React.Component {
             <Route
               exact
               path="/movie/:id"
-              render={() => <Movie key={currentMovie.imdbID} currentMovie={currentMovie} loading={loading} faves={faves}/>}
+              render={() => (
+                <Movie
+                  key={currentMovie.imdbID}
+                  currentMovie={currentMovie}
+                  loading={loading}
+                  faves={faves}
+                />
+              )}
             />
             <Route
               exact

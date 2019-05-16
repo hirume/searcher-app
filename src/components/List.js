@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import ListItem from "./ListItem.js";
 import "./List.css";
 
-function List(props) {
+const List = (props) => {
   return (
     <div className="list-container">
       {props.movies.length > 0 ? (
