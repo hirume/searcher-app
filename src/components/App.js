@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./Header.js";

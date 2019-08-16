@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Loading from "./Loading";
 import List from "./List";
 import { withRouter } from "react-router-dom";

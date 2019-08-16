@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Error.css'
 
 export const Error = (props) => {
